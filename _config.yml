@@ -7,21 +7,17 @@
 # https://learnxinyminutes.com/docs/yaml/
 
 
-title: fastpages
-description: An easy to use blogging platform with support for Jupyter Notebooks.
-#github_username: sanchit-agarwal
-# you can comment the below line out if your repo name is not different than your baseurl
-#github_repo: "sanchit-agarwal.github.io"
-=======
-title: Sanchit Agarwal
-description: My blog on almost everything tech
-github_username: sanchit-agarwal
+title: "Sanchit Agarwal"
+description: "My blog on almost everything tech"
+github_username: "sanchit-agarwal"
+
 # you can comment the below line out if your repo name is not different than your baseurl
 # github_repo: "fastpages"
 
 
 # OPTIONAL: override baseurl and url if using a custom domain
 # Note: leave out the trailing / from this value. 
+
 url: "https://sanchit-agarwal.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 ###########################################################
