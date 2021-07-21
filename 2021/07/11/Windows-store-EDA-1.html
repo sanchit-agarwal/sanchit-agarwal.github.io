@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Windows Store dataset Exploatory Data Analysis | Sanchit Agarwal</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Windows Store dataset Exploatory Data Analysis" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Exploatory Data Analysis (EDA) on The Windows Store dataset from Kaggle: https://www.kaggle.com/vishnuvarthanrao/windows-store" />
+<meta property="og:description" content="Exploatory Data Analysis (EDA) on The Windows Store dataset from Kaggle: https://www.kaggle.com/vishnuvarthanrao/windows-store" />
+<link rel="canonical" href="https://sanchit-agarwal.github.io/sanchit-agarwal.github.io/2021/07/11/Windows-store-EDA-1.html" />
+<meta property="og:url" content="https://sanchit-agarwal.github.io/sanchit-agarwal.github.io/2021/07/11/Windows-store-EDA-1.html" />
+<meta property="og:site_name" content="Sanchit Agarwal" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-11T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://sanchit-agarwal.github.io/sanchit-agarwal.github.io/2021/07/11/Windows-store-EDA-1.html","@type":"BlogPosting","headline":"Windows Store dataset Exploatory Data Analysis","dateModified":"2021-07-11T00:00:00-05:00","datePublished":"2021-07-11T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://sanchit-agarwal.github.io/sanchit-agarwal.github.io/2021/07/11/Windows-store-EDA-1.html"},"description":"Exploatory Data Analysis (EDA) on The Windows Store dataset from Kaggle: https://www.kaggle.com/vishnuvarthanrao/windows-store","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/sanchit-agarwal.github.io/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://sanchit-agarwal.github.io/sanchit-agarwal.github.io/feed.xml" title="Sanchit Agarwal" /><link rel="shortcut icon" type="image/x-icon" href="/sanchit-agarwal.github.io/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/sanchit-agarwal.github.io/">Sanchit Agarwal</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/sanchit-agarwal.github.io/about/">About Me</a><a class="page-link" href="/sanchit-agarwal.github.io/search/">Search</a><a class="page-link" href="/sanchit-agarwal.github.io/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Windows Store dataset Exploatory Data Analysis</h1><p class="page-description">Exploatory Data Analysis (EDA) on The Windows Store dataset from Kaggle: https://www.kaggle.com/vishnuvarthanrao/windows-store</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-07-11T00:00:00-05:00" itemprop="datePublished">
+        Jul 11, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+
+    
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-07-11-Windows store EDA 1.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Today I will be doing <b>Exploratory Data Analysis (EDA)</b> on The Windows Store dataset by @Vishnu.</p>
+<p>I love Docker to keep everything compartmentalize and neat. Plus, it also ensures you that you can also easily shift (and scale) your system to any of your favorite cloud provider like AWS, Azure, Google Cloud etc. If you don't know what Docker is then I highly suggest you to check out this link</p>
+<p><a href="https://www.zdnet.com/article/what-is-docker-and-why-is-it-so-darn-popular/">https://www.zdnet.com/article/what-is-docker-and-why-is-it-so-darn-popular/</a></p>
+<p>For meeting my relational database needs, I am choosing an official docker image of SQL Server 2019 version. One free tip for you guys:</p>
+<p>if you are doing anything with your containers which you would have to access later, don't forget to use persistant storage. And please use volumes, not bind mounts (Will explain this in some future article).</p>
+<p>For setting up my Python IDE, I downloaded an official docker image of Jupyter notebook (not the Jupyter lab), which was super easy to setup. Just don't forget to enable port forwarding between the container and the host on 8888. I first thought of building my own python notebook docker image from scratch but then I procastinated it till the near future. Here's the link to that image:</p>
+<p><a href="https://hub.docker.com/r/jupyter/minimal-notebook">https://hub.docker.com/r/jupyter/minimal-notebook</a></p>
+<p>For those who have just entered the Docker realm, it's dangerous to go alone. Take these docker commands!</p>
+<ul>
+<li><p><code>docker rename &lt;old_container_name&gt; &lt;new_container_name&gt;</code></p>
+<p>Self explantory</p>
+</li>
+<li><p><code>docker cp &lt;host_filepath&gt; &lt;container_filepath&gt;</code></p>
+<p>For copying a file located in your local system to a container.</p>
+</li>
+<li><p><code>docker ps -a</code></p>
+<p>Lists all docker containers</p>
+</li>
+<li><p><code>docker exec -it &lt;container_name&gt; "bash"</code></p>
+<p>Opens a bash terminal connected with the forementioned container</p>
+</li>
+<li><p><code>docker images</code></p>
+<p>Lists all images downloaded on the local system. You can use docker images rm <image_id> to do housecleaning.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The dataset contains 6 columns, which are pretty self explanatory, so I won't be explaning them here. They are also mentioned in the dataset's description.</p>
+<p>A quick look at the dataset through Excel revealed that the date column contained values in 2 different formats, which had to be fixed before I can import it into SQL Server. Even after using Excel's default data formatting,only values belonging to one particular format got converted into DateTime datatype, and the rest still remained as text strings. Fear not! As by using some clever usage of Excel formulas, this was resolved.</p>
+<p>Basically, by extracting substrings from the values and feeding them individually as date components in the date formula, as I was able to convert the remaining values.</p>
+<p>Here's the snippet:</p>
+<p><code>IF(ISTEXT($E4), DATE( RIGHT($E4,4), MID($E4,4,2), LEFT($E4,2)), $E4)</code></p>
+<p>The IF condition checks if the value is actually a text or a number (since the column contained both) &amp; RIGHT, MID and LEFT are positional string extraction methods.</p>
+<p>Here's the result:</p>
+<p><img src="/images/copied_from_nb/download.png" alt="" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I replaced commas in the values of the NAME column so that it would be much easier to import the whole dataset into the SQL Server, as a CSV file.</p>
+<p>The PRICE column consisted mostly of "Free" (which I replaced with 0), and the remaining values were concatenated with the ₹ currency symbol. Apparently, Excel doesn't give us any decent inbuilt method to extract numbers from text, and so, I had to take a more comprehensive approach. Here's the full formula:</p>
+<p><code>VALUE(RIGHT(F5164, LEN(F5164) - MIN(SEARCH({0,1,2,3,4,5,6,7,8,9}, $F5164&amp;"123456789")) + 1))</code></p>
+<p>Lets break it down, shall we!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li><p><code>MIN(SEARCH({0,1,2,3,4,5,6,7,8,9}, $F5164&amp;"123456789")</code></p>
+<p>I use the SEARCH function to find the location of the first digit in the string. Here, the constant array               {0,1,2,3,4,5,6,7,8,9} defines all the digits I need to search and $F5164&amp;"123456789" is the target cell, concatenated with string "1234567890" to help provide the SEARCH function with a "fake" position for digits which are not there in the target cell.</p>
+<p>Finally, MIN function is used to give the smallest value from the result of the SEARCH function, corrosponding to the location of the first digit in the string.</p>
+</li>
+</ol>
+<ol>
+<li><p><code>RIGHT(F5164, LEN(F5164) - MIN(SEARCH({0,1,2,3,4,5,6,7,8,9}, $F5164&amp;"123456789")) + 1)</code></p>
+<p>Here we use RIGHT function, which extracts a given length of substring from a string starting from the right side. The first digit location is subtracted from the total length of the main string to get the total number of digits to be extracted. 1 is added to count for the first digit itself.</p>
+</li>
+</ol>
+<ol>
+<li><p><code>VALUE(RIGHT(............................))</code></p>
+<p>Since Excel will return the substring as a text, which i certainly don't want, I used the VALUE function to convert them into numbers.</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After the data cleaning was done, I was ready to upload the data to the SQL server. I used the BULK INSERT function to import my CSV into a already made, nice and juicy SQL table. Here's the full syntax:</p>
+<p><code>bulk insert into WINDOWS_STORE from "/datasets/msft.csv" with(firstrow = 2, type = "csv")</code></p>
+<p>FIRSTROW parameter is used to tell the function to ignore the header row when importing.</p>
+<p>One thing, which I ignored in my early data cleaning shenanigans and caused me a lot of distress while I tried to figure out why my SQL syntax was not working, was quite a few records contained names with special characters, which the VARCHAR datatype doesn't support. I had to alter my table's NAME column to have NVARCHAR as its datatype. This solved the problem.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So this is it for now. To conclude, I was able to setup a local containerized development environment on my laptop, cleaned my data and, imported it to my local SQL server instance.</p>
+<p>In my next article, I will start with the fun part: <b>Exploring and Visualizing</b>.</p>
+
+</div>
+</div>
+</div>
+&lt;/div&gt;
+ 
+
+</image_id></p></li></ul></div></div></div></div>
+
+
+  </div><a class="u-url" href="/sanchit-agarwal.github.io/2021/07/11/Windows-store-EDA-1.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/sanchit-agarwal.github.io/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/sanchit-agarwal.github.io/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/sanchit-agarwal.github.io/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>My blog on almost everything tech</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/sanchit-agarwal.github.io/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/sanchit-agarwal.github.io/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
